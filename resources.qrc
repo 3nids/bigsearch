@@ -1,0 +1,11 @@
+<RCC>
+    <qresource prefix="/plugins/globalfinder" >
+        <file>icons/globalfinder.svg</file>
+        <file>icons/help.svg</file>
+        <file>icons/settings.svg</file>
+        <file>icons/add.svg</file>
+        <file>icons/remove.svg</file>
+        <file>icons/edit.svg</file>
+        <file>icons/expression.svg</file>
+    </qresource>
+</RCC>

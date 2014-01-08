@@ -1,10 +1,10 @@
 #-----------------------------------------------------------
 #
-# Intersect It is a QGIS plugin to place observations (distance or orientation)
-# with their corresponding precision, intersect them using a least-squares solution
-# and save dimensions in a dedicated layer to produce maps.
+# Global Finder is a QGIS plugin to perform text-search over
+# all intended layers and using QGIS expressions to allow advanced
+# search. This is comparable to what is done in web-mapping clients.
 #
-# Copyright    : (C) 2013 Denis Rouzaud
+# Copyright    : (C) 2014 Denis Rouzaud
 # Email        : denis.rouzaud@gmail.com
 #
 #-----------------------------------------------------------

@@ -32,12 +32,7 @@ from PyQt4.QtCore import QUrl, QCoreApplication, QFileInfo, QSettings, QTranslat
 from PyQt4.QtGui import QAction, QIcon, QDesktopServices
 from qgis.core import QgsApplication
 
-from gui.mysettingsdialog import MySettingsDialog
-from gui.dimensioneditmaptool import DimensionEditMapTool
-from gui.distancemaptool import DistanceMapTool
-from gui.orientationmaptool import OrientationMapTool
-from gui.advancedintersectionmaptool import AdvancedIntersectionMapTool
-from gui.simpleintersectionmaptool import SimpleIntersectionMapTool
+from gui.configurationdialog import ConfigurationDialog
 
 import resources
 
@@ -62,16 +57,17 @@ class BigSearch ():
             QCoreApplication.installTranslator(self.translator)
 
     def initGui(self):
-        # dock
-        self.dockAction = QAction(QIcon(":/plugins/bigsearch/icons/bigsearch.svg"), "Big Search",
-                                  self.iface.mainWindow())
-        self.dockAction.setCheckable(True)
-        self.dockAction.triggered.connect(self.dock.setVisible)
-        self.iface.addPluginToMenu("&Big Search", self.dockAction)
-        self.iface.addToolBarIcon(self.dockAction)
-        self.dock.visibilityChanged.connect(self.dockAction.setChecked)
+        # # dock
+        # self.dockAction = QAction(QIcon(":/plugins/bigsearch/icons/bigsearch.svg"), "Big Search",
+        #                           self.iface.mainWindow())
+        # self.dockAction.setCheckable(True)
+        # self.dockAction.triggered.connect(self.dock.setVisible)
+        # self.iface.addPluginToMenu("&Big Search", self.dockAction)
+        # self.iface.addToolBarIcon(self.dockAction)
+        # self.dock.visibilityChanged.connect(self.dockAction.setChecked)
+
         # settings
-        self.settingsAction = QAction(QIcon(":/plugins/bigsearch/icons/settings.svg"), "Settings",
+        self.settingsAction = QAction(QIcon(":/plugins/bigsearch/icons/settings.svg"), "Configuration",
                                       self.iface.mainWindow())
         self.settingsAction.triggered.connect(self.showSettings)
         self.iface.addPluginToMenu("&Big Search", self.settingsAction)
@@ -82,10 +78,10 @@ class BigSearch ():
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu("&Big Search", self.dockAction)
+        # self.iface.removePluginMenu("&Big Search", self.dockAction)
         self.iface.removePluginMenu("&Big Search", self.helpAction)
         self.iface.removePluginMenu("&Big Search", self.settingsAction)
         self.iface.removeToolBarIcon(self.dockAction)
 
     def showSettings(self):
-        MySettingsDialog().exec_()
+        ConfigurationDialog().exec_()

@@ -1,14 +1,14 @@
 
 [general]
-name=Intersect It
-description=Intersect It Intersect is a QGIS plugin to construct points by intersecting distances and orientations and to draw dimensions.
-version=3.3.1
+name=Big Search
+description=Big Search is a QGIS plugin to perform text-search over all intended layers and using QGIS expressions to allow advanced search. This is comparable to what is done in web-mapping clients.
+version=1.0
 qgisMinimumVersion=2.0
 
 experimental=False
-icon=icons/intersectit-128.png
+icon=icons/bigsearch-128.png
 
-tags=distance,orientation,observation,least-squares,intersection,dimension,cad
+tags=search,find
 homepage=http://3nids.github.io/intersectit
 tracker=https://github.com/3nids/intersectit/issues
 repository=https://github.com/3nids/intersectit

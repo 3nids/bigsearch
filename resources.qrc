@@ -1,6 +1,8 @@
 <RCC>
     <qresource prefix="/plugins/globalfinder" >
-        <file>icons/globalfinder.svg</file>
+        <file>icons/bigsearch.svg</file>
+        <file>icons/geocoder.svg</file>
+        <file>icons/glass.svg</file>
         <file>icons/help.svg</file>
         <file>icons/settings.svg</file>
         <file>icons/add.svg</file>

@@ -12,7 +12,7 @@
 # Makefile for a PyQGIS plugin 
 
 # global
-PLUGINNAME = globalfinder
+PLUGINNAME = bigsearch
 PY_FILES = __init__.py $(PLUGINNAME).py
 EXTRAS = metadata.txt resources.qrc
 TOOL_DIR = gui core ui qgiscombomanager qgissettingmanager

@@ -81,7 +81,7 @@ class BigSearch ():
         # self.iface.removePluginMenu("&Big Search", self.dockAction)
         self.iface.removePluginMenu("&Big Search", self.helpAction)
         self.iface.removePluginMenu("&Big Search", self.settingsAction)
-        self.iface.removeToolBarIcon(self.dockAction)
+        # self.iface.removeToolBarIcon(self.dockAction)
 
     def showSettings(self):
         ConfigurationDialog().exec_()

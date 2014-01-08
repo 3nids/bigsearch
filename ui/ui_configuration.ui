@@ -137,7 +137,7 @@
           </sizepolicy>
          </property>
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <widget class="QWidget" name="mOptsPage_01">
           <layout class="QVBoxLayout" name="verticalLayout_14">
@@ -167,8 +167,8 @@
                <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>167</width>
-                <height>90</height>
+                <width>653</width>
+                <height>453</height>
                </rect>
               </property>
               <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -183,29 +183,31 @@
                  <property name="title">
                   <string>place the widget in</string>
                  </property>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioButton">
-                 <property name="text">
-                  <string>toolbar</string>
-                 </property>
-                 <property name="checked">
-                  <bool>true</bool>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">buttonGroup</string>
-                 </attribute>
-                </widget>
-               </item>
-               <item>
-                <widget class="QRadioButton" name="radioButton_2">
-                 <property name="text">
-                  <string>dock area</string>
-                 </property>
-                 <attribute name="buttonGroup">
-                  <string notr="true">buttonGroup</string>
-                 </attribute>
+                 <layout class="QGridLayout" name="gridLayout_4">
+                  <item row="0" column="0">
+                   <widget class="QRadioButton" name="radioButton">
+                    <property name="text">
+                     <string>toolbar</string>
+                    </property>
+                    <property name="checked">
+                     <bool>true</bool>
+                    </property>
+                    <attribute name="buttonGroup">
+                     <string notr="true">buttonGroup</string>
+                    </attribute>
+                   </widget>
+                  </item>
+                  <item row="1" column="0">
+                   <widget class="QRadioButton" name="radioButton_2">
+                    <property name="text">
+                     <string>dock area</string>
+                    </property>
+                    <attribute name="buttonGroup">
+                     <string notr="true">buttonGroup</string>
+                    </attribute>
+                   </widget>
+                  </item>
+                 </layout>
                 </widget>
                </item>
                <item>
@@ -401,7 +403,7 @@
          <enum>Qt::Horizontal</enum>
         </property>
         <property name="standardButtons">
-         <set>QDialogButtonBox::Apply|QDialogButtonBox::Cancel|QDialogButtonBox::Help|QDialogButtonBox::Ok</set>
+         <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
         </property>
        </widget>
       </item>

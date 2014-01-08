@@ -35,6 +35,7 @@ from ..ui.ui_configuration import Ui_Configuration
 
 class ConfigurationDialog(QgsOptionsDialogBase, Ui_Configuration):
     def __init__(self):
-        QgsOptionsDialogBase.__init__(self)
-        self.setupUi(self, "BigSearch")
+        QgsOptionsDialogBase.__init__(self, "BigSearch")
+        self.setupUi(self)
+        self.initOptionsBase(False)
 

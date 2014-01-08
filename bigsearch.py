@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# Global Finder is a QGIS plugin to perform text-search over
+# Big Search is a QGIS plugin to perform text-search over
 # all intended layers and using QGIS expressions to allow advanced
 # search. This is comparable to what is done in web-mapping clients.
 #
@@ -32,8 +32,6 @@ from PyQt4.QtCore import QUrl, QCoreApplication, QFileInfo, QSettings, QTranslat
 from PyQt4.QtGui import QAction, QIcon, QDesktopServices
 from qgis.core import QgsApplication
 
-from core.memorylayers import MemoryLayers
-
 from gui.mysettingsdialog import MySettingsDialog
 from gui.dimensioneditmaptool import DimensionEditMapTool
 from gui.distancemaptool import DistanceMapTool
@@ -44,19 +42,19 @@ from gui.simpleintersectionmaptool import SimpleIntersectionMapTool
 import resources
 
 
-class GlobalFinder ():
+class BigSearch ():
     def __init__(self, iface):
         self.iface = iface
 
         # Initialise the translation environment.
-        userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path()+"/python/plugins/globalfinder"
-        systemPluginPath = QgsApplication.prefixPath()+"/share/qgis/python/plugins/globalfinder"
+        userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path()+"/python/plugins/bigsearch"
+        systemPluginPath = QgsApplication.prefixPath()+"/share/qgis/python/plugins/bigsearch"
         locale = QSettings().value("locale/userLocale")
         myLocale = locale[0:2]
         if QFileInfo(userPluginPath).exists():
-            pluginPath = userPluginPath+"/i18n/globalfinder_"+myLocale+".qm"
+            pluginPath = userPluginPath+"/i18n/bigsearch_"+myLocale+".qm"
         elif QFileInfo(systemPluginPath).exists():
-            pluginPath = systemPluginPath+"/i18n/globalfinder_"+myLocale+".qm"
+            pluginPath = systemPluginPath+"/i18n/bigsearch_"+myLocale+".qm"
         self.localePath = pluginPath
         if QFileInfo(self.localePath).exists():
             self.translator = QTranslator()
@@ -65,28 +63,28 @@ class GlobalFinder ():
 
     def initGui(self):
         # dock
-        self.dockAction = QAction(QIcon(":/plugins/globalfinder/icons/globalfinder.svg"), "Global Finder",
+        self.dockAction = QAction(QIcon(":/plugins/bigsearch/icons/bigsearch.svg"), "Big Search",
                                   self.iface.mainWindow())
         self.dockAction.setCheckable(True)
         self.dockAction.triggered.connect(self.dock.setVisible)
-        self.iface.addPluginToMenu("&Global Finder", self.dockAction)
+        self.iface.addPluginToMenu("&Big Search", self.dockAction)
         self.iface.addToolBarIcon(self.dockAction)
         self.dock.visibilityChanged.connect(self.dockAction.setChecked)
         # settings
-        self.settingsAction = QAction(QIcon(":/plugins/globalfinder/icons/settings.svg"), "Settings",
+        self.settingsAction = QAction(QIcon(":/plugins/bigsearch/icons/settings.svg"), "Settings",
                                       self.iface.mainWindow())
         self.settingsAction.triggered.connect(self.showSettings)
-        self.iface.addPluginToMenu("&Global Finder", self.settingsAction)
+        self.iface.addPluginToMenu("&Big Search", self.settingsAction)
         # help
-        self.helpAction = QAction(QIcon(":/plugins/globalfinder/icons/help.svg"), "Help", self.iface.mainWindow())
-        self.helpAction.triggered.connect(lambda: QDesktopServices().openUrl(QUrl("http://io.github.com/3nids/globalfinder/")))
-        self.iface.addPluginToMenu("&Global Finder", self.helpAction)
+        self.helpAction = QAction(QIcon(":/plugins/bigsearch/icons/help.svg"), "Help", self.iface.mainWindow())
+        self.helpAction.triggered.connect(lambda: QDesktopServices().openUrl(QUrl("http://io.github.com/3nids/bigsearch/")))
+        self.iface.addPluginToMenu("&Big Search", self.helpAction)
 
     def unload(self):
         # Remove the plugin menu item and icon
-        self.iface.removePluginMenu("&Global Finder", self.dockAction)
-        self.iface.removePluginMenu("&Global Finder", self.helpAction)
-        self.iface.removePluginMenu("&Global Finder", self.settingsAction)
+        self.iface.removePluginMenu("&Big Search", self.dockAction)
+        self.iface.removePluginMenu("&Big Search", self.helpAction)
+        self.iface.removePluginMenu("&Big Search", self.settingsAction)
         self.iface.removeToolBarIcon(self.dockAction)
 
     def showSettings(self):

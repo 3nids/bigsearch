@@ -29,8 +29,8 @@
 
 
 def classFactory(iface):
-    from globalfinder import GlobalFinder
-    return GlobalFinder(iface)
+    from bigsearch import BigSearch
+    return BigSearch(iface)
     
 
 

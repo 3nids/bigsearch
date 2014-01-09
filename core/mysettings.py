@@ -40,5 +40,5 @@ class MySettings(SettingManager):
         # global settings
 
         # project settings
-        self.addSetting("layers", "stringlist", "project", [])
+        self.addSetting("layers", "stringlist", "layerEntries", [])
 

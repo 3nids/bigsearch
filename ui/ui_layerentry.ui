@@ -6,15 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>259</width>
-    <height>238</height>
+    <width>471</width>
+    <height>312</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Big Search :: layer entry</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
-   <item row="7" column="0" colspan="4">
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="text">
+      <string>search in</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0" rowspan="2">
+    <widget class="QLabel" name="label_5">
+     <property name="text">
+      <string>zoom to</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="0" colspan="4">
     <widget class="QDialogButtonBox" name="buttonBox">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -24,42 +38,11 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="3">
-    <widget class="QToolButton" name="toolButton_2">
-     <property name="text">
-      <string>...</string>
-     </property>
-     <property name="icon">
-      <iconset resource="../resources.qrc">
-       <normaloff>:/plugins/globalfinder/icons/expression.svg</normaloff>:/plugins/globalfinder/icons/expression.svg</iconset>
-     </property>
-    </widget>
-   </item>
    <item row="0" column="1" colspan="2">
-    <widget class="QComboBox" name="layer"/>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLabel" name="label_3">
-     <property name="text">
-      <string>x</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1">
-    <widget class="QLabel" name="label_4">
-     <property name="text">
-      <string>y</string>
-     </property>
-     <property name="alignment">
-      <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
-     </property>
-    </widget>
+    <widget class="QComboBox" name="layerCombobox"/>
    </item>
    <item row="3" column="1" colspan="3">
-    <widget class="QRadioButton" name="radioButton_4">
+    <widget class="QRadioButton" name="zoomToExpressionRadio">
      <property name="text">
       <string>field defined location</string>
      </property>
@@ -68,10 +51,17 @@
      </attribute>
     </widget>
    </item>
-   <item row="5" column="3">
-    <widget class="QToolButton" name="toolButton_3">
+   <item row="7" column="0">
+    <widget class="QLabel" name="label_6">
      <property name="text">
-      <string>...</string>
+      <string>at scale</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="3">
+    <widget class="QToolButton" name="searchExpressionButton">
+     <property name="text">
+      <string/>
      </property>
      <property name="icon">
       <iconset resource="../resources.qrc">
@@ -79,14 +69,11 @@
      </property>
     </widget>
    </item>
-   <item row="5" column="2">
-    <widget class="QComboBox" name="yField"/>
-   </item>
-   <item row="4" column="2">
-    <widget class="QComboBox" name="xField"/>
+   <item row="7" column="1" colspan="2">
+    <widget class="QComboBox" name="comboBox"/>
    </item>
    <item row="2" column="1" colspan="3">
-    <widget class="QRadioButton" name="radioButton_3">
+    <widget class="QRadioButton" name="zoomToFeatureRadio">
      <property name="text">
       <string>feature</string>
      </property>
@@ -98,40 +85,107 @@
      </attribute>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
      <property name="text">
-      <string>Search in</string>
+      <string>layer</string>
      </property>
     </widget>
    </item>
    <item row="1" column="1" colspan="2">
-    <widget class="QComboBox" name="searchField"/>
+    <widget class="QComboBox" name="searchCombobox"/>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="text">
-      <string>Layer</string>
+   <item row="4" column="1" colspan="3">
+    <widget class="QWidget" name="widget" native="true">
+     <property name="enabled">
+      <bool>false</bool>
      </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Maximum">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <layout class="QGridLayout" name="gridLayout">
+      <property name="margin">
+       <number>0</number>
+      </property>
+      <item row="2" column="2">
+       <widget class="QComboBox" name="yCombobox"/>
+      </item>
+      <item row="1" column="2">
+       <widget class="QComboBox" name="xCombobox">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QToolButton" name="xExpressionButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/plugins/globalfinder/icons/expression.svg</normaloff>:/plugins/globalfinder/icons/expression.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QToolButton" name="yExpressionButton">
+        <property name="text">
+         <string>...</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../resources.qrc">
+          <normaloff>:/plugins/globalfinder/icons/expression.svg</normaloff>:/plugins/globalfinder/icons/expression.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="text">
+         <string>x</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>y</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
-   <item row="2" column="0" rowspan="2">
-    <widget class="QLabel" name="label_5">
-     <property name="text">
-      <string>zoom to</string>
+   <item row="8" column="0">
+    <spacer name="verticalSpacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
      </property>
-    </widget>
-   </item>
-   <item row="1" column="3">
-    <widget class="QToolButton" name="toolButton">
-     <property name="text">
-      <string/>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>20</width>
+       <height>40</height>
+      </size>
      </property>
-     <property name="icon">
-      <iconset resource="../resources.qrc">
-       <normaloff>:/plugins/globalfinder/icons/expression.svg</normaloff>:/plugins/globalfinder/icons/expression.svg</iconset>
-     </property>
-    </widget>
+    </spacer>
    </item>
   </layout>
  </widget>
@@ -147,11 +201,11 @@
    <hints>
     <hint type="sourcelabel">
      <x>248</x>
-     <y>254</y>
+     <y>276</y>
     </hint>
     <hint type="destinationlabel">
      <x>157</x>
-     <y>274</y>
+     <y>265</y>
     </hint>
    </hints>
   </connection>
@@ -162,12 +216,28 @@
    <slot>reject()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
+     <x>283</x>
+     <y>278</y>
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
-     <y>274</y>
+     <y>265</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>zoomToExpressionRadio</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>widget</receiver>
+   <slot>setEnabled(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>217</x>
+     <y>119</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>171</x>
+     <y>163</y>
     </hint>
    </hints>
   </connection>

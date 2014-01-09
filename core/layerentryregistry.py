@@ -1,6 +1,6 @@
 #-----------------------------------------------------------
 #
-# Big Search is a QGIS plugin to perform text-search over
+# Global Finder is a QGIS plugin to perform text-search over
 # all intended layers and using QGIS expressions to allow advanced
 # search. This is comparable to what is done in web-mapping clients.
 #
@@ -27,37 +27,7 @@
 #
 #---------------------------------------------------------------------
 
-from PyQt4.QtCore import pyqtSlot
-from qgis.gui import QgsOptionsDialogBase
 
-from layerentrydialog import LayerEntryDialog
-from ..ui.ui_configuration import Ui_Configuration
-
-
-class ConfigurationDialog(QgsOptionsDialogBase, Ui_Configuration):
-    def __init__(self, iface):
-        QgsOptionsDialogBase.__init__(self, "BigSearch", iface.mainWindow())
-        self.setupUi(self)
-        self.initOptionsBase(False)
-        self.restoreOptionsBaseUi()
-
-    @pyqtSlot(name="on_layerAddButton_pressed")
-    def addLayer(self):
-        self.layerEntryDlg = LayerEntryDialog()
-        if not self.layerEntryDlg.exec_():
-            return
-        layerEntry = self.layerEntryDlg.getEntry()
-        if layerEntry is None:
-            return
-        self.addLine(layerEntry)
-
-    def addLine(self, layerEntry):
-        nr = self.tableWidget.rowCount()
-        self.tableWidget.insertRow(nr)
-
-
-
-
-
-
-
+class LayerEntryRegistry():
+    def __init__():
+        pass

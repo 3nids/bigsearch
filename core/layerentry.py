@@ -27,37 +27,19 @@
 #
 #---------------------------------------------------------------------
 
-from PyQt4.QtCore import pyqtSlot
-from qgis.gui import QgsOptionsDialogBase
+from PyQt4.QtCore import QUuid
 
-from layerentrydialog import LayerEntryDialog
-from ..ui.ui_configuration import Ui_Configuration
+class LayerEntry():
+    def __init__(self, layerid, expression, useFeatureGeom=True, xExpression=None, yExpression=None, uuid=None):
+        self.layerid = layerid
+        self.expression = expression
+        self.useFeatureGeom = useFeatureGeom
+        self.xExpression = xExpression
+        self.yExpression = yExpression
 
-
-class ConfigurationDialog(QgsOptionsDialogBase, Ui_Configuration):
-    def __init__(self, iface):
-        QgsOptionsDialogBase.__init__(self, "BigSearch", iface.mainWindow())
-        self.setupUi(self)
-        self.initOptionsBase(False)
-        self.restoreOptionsBaseUi()
-
-    @pyqtSlot(name="on_layerAddButton_pressed")
-    def addLayer(self):
-        self.layerEntryDlg = LayerEntryDialog()
-        if not self.layerEntryDlg.exec_():
-            return
-        layerEntry = self.layerEntryDlg.getEntry()
-        if layerEntry is None:
-            return
-        self.addLine(layerEntry)
-
-    def addLine(self, layerEntry):
-        nr = self.tableWidget.rowCount()
-        self.tableWidget.insertRow(nr)
-
-
-
-
+        if uuid is None:
+            uuid = QUuid()
+        self.uuid = uuid
 
 
 

@@ -84,4 +84,4 @@ class BigSearch ():
         # self.iface.removeToolBarIcon(self.dockAction)
 
     def showSettings(self):
-        ConfigurationDialog().exec_()
+        ConfigurationDialog(self.iface).exec_()

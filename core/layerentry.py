@@ -27,19 +27,21 @@
 #
 #---------------------------------------------------------------------
 
-from PyQt4.QtCore import QUuid
+from qgis.core import QgsMapLayerRegistry
+
 
 class LayerEntry():
-    def __init__(self, layerid, expression, useFeatureGeom=True, xExpression=None, yExpression=None, uuid=None):
+    def __init__(self, layerid, expression, useFeatureGeom=True, xExpression=None, yExpression=None):
         self.layerid = layerid
         self.expression = expression
         self.useFeatureGeom = useFeatureGeom
         self.xExpression = xExpression
         self.yExpression = yExpression
 
-        if uuid is None:
-            uuid = QUuid()
-        self.uuid = uuid
+    def layer(self):
+        return QgsMapLayerRegistry.instance().mapLayer(self.layerid)
+
+
 
 
 

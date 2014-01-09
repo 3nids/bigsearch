@@ -27,9 +27,11 @@
 #
 #---------------------------------------------------------------------
 
-from PyQt4.QtCore import pyqtSlot
+from PyQt4.QtCore import Qt, pyqtSlot
+from PyQt4.QtGui import QTableWidgetItem
 from qgis.gui import QgsOptionsDialogBase
 
+from ..core.layerentriesregistry import LayerEntriesRegistry
 from layerentrydialog import LayerEntryDialog
 from ..ui.ui_configuration import Ui_Configuration
 
@@ -40,6 +42,9 @@ class ConfigurationDialog(QgsOptionsDialogBase, Ui_Configuration):
         self.setupUi(self)
         self.initOptionsBase(False)
         self.restoreOptionsBaseUi()
+        self.layerEntryRegistry = LayerEntriesRegistry()
+        self.layerEntries = LayerEntriesRegistry.read()
+        self.showLines()
 
     @pyqtSlot(name="on_layerAddButton_pressed")
     def addLayer(self):
@@ -47,13 +52,33 @@ class ConfigurationDialog(QgsOptionsDialogBase, Ui_Configuration):
         if not self.layerEntryDlg.exec_():
             return
         layerEntry = self.layerEntryDlg.getEntry()
-        if layerEntry is None:
-            return
-        self.addLine(layerEntry)
+        if layerEntry is not None:
+            self.layerEntries.append(layerEntry)
+        self.layerEntryRegistry.save(self.layerEntries)
+        self.showLines()
 
-    def addLine(self, layerEntry):
-        nr = self.tableWidget.rowCount()
-        self.tableWidget.insertRow(nr)
+    def showLines(self):
+        self.tableWidget.clearContents()
+        for r in range(self.tableWidget.rowCount() - 1, -1, -1):
+            self.tableWidget.removeRow(r)
+        for layerEntry in self.layerEntries:
+            layer = layerEntry.layer()
+            if layer is None:
+                continue
+            r = self.tableWidget.rowCount()
+            self.tableWidget.insertRow(r)
+
+            self.tableWidget.setItem(r, 0, QTableWidgetItem(layer.name()))
+            self.tableWidget.setItem(r, 1, QTableWidgetItem(layerEntry.expression))
+            if layerEntry.useFeatureGeom:
+                self.tableWidget.setItem(r, 2, QTableWidgetItem("feature"))
+            else:
+                self.tableWidget.setItem(r, 2, QTableWidgetItem("expression"))
+
+
+
+
+
 
 
 

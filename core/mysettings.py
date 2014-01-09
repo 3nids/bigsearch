@@ -30,7 +30,7 @@
 from PyQt4.QtGui import QColor
 from ..qgissettingmanager import *
 
-pluginName = "globalfinder"
+pluginName = "bigsearch"
 
 
 class MySettings(SettingManager):

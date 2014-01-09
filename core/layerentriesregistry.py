@@ -64,7 +64,7 @@ class LayerEntriesRegistry():
             if varName not in projectEntries:
                 break
             entryData = project.readListEntry("bigsearch", varName)[0]
-            entry = LayerEntry(entryData[0], entryData[1], entryData[2], entryData[3], entryData[4])
+            entry = LayerEntry(entryData[0], entryData[1], bool(entryData[2]), entryData[3], entryData[4])
             entries.append(entry)
             i += 1
         return entries

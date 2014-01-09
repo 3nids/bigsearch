@@ -27,8 +27,8 @@
 #
 #---------------------------------------------------------------------
 
-from PyQt4.QtCore import Qt, pyqtSlot
-from PyQt4.QtGui import QTableWidgetItem
+from PyQt4.QtCore import pyqtSlot
+from PyQt4.QtGui import QTableWidgetItem, QTableWidgetSelectionRange
 from qgis.gui import QgsOptionsDialogBase
 
 from ..core.layerentriesregistry import LayerEntriesRegistry
@@ -46,6 +46,10 @@ class ConfigurationDialog(QgsOptionsDialogBase, Ui_Configuration):
         self.layerEntries = LayerEntriesRegistry.read()
         self.showLines()
 
+    def accept(self):
+        self.layerEntryRegistry.save(self.layerEntries)
+        QgsOptionsDialogBase.accept(self)
+
     @pyqtSlot(name="on_layerAddButton_pressed")
     def addLayer(self):
         self.layerEntryDlg = LayerEntryDialog()
@@ -54,8 +58,55 @@ class ConfigurationDialog(QgsOptionsDialogBase, Ui_Configuration):
         layerEntry = self.layerEntryDlg.getEntry()
         if layerEntry is not None:
             self.layerEntries.append(layerEntry)
-        self.layerEntryRegistry.save(self.layerEntries)
         self.showLines()
+
+    @pyqtSlot(name="on_layerRemoveButton_pressed")
+    def removeLayer(self):
+        selItems = self.tableWidget.selectedItems()
+        if len(selItems) == 0:
+            return
+        row = selItems[0].row()
+        self.layerEntries.pop(row)
+        self.showLines()
+
+    @pyqtSlot(name="on_layerEditButton_pressed")
+    def editLayer(self):
+        selItems = self.tableWidget.selectedItems()
+        if len(selItems) == 0:
+            return
+        row = selItems[0].row()
+        self.layerEntryDlg = LayerEntryDialog(self.layerEntries[row])
+        if not self.layerEntryDlg.exec_():
+            return
+        self.layerEntries.pop(row)
+        layerEntry = self.layerEntryDlg.getEntry()
+        if layerEntry is not None:
+            self.layerEntries.insert(row, layerEntry)
+        self.showLines()
+
+    @pyqtSlot(name="on_layerUpButton_pressed")
+    def layerUp(self):
+        selItems = self.tableWidget.selectedItems()
+        if len(selItems) == 0:
+            return
+        row = selItems[0].row()
+        if row == 0:
+            return
+        self.layerEntries[row-1], self.layerEntries[row] = self.layerEntries[row], self.layerEntries[row-1]
+        self.showLines()
+        self.tableWidget.setRangeSelected(QTableWidgetSelectionRange(row-1, 0, row-1, 3), True)
+
+    @pyqtSlot(name="on_layerDownButton_pressed")
+    def layerDown(self):
+        selItems = self.tableWidget.selectedItems()
+        if len(selItems) == 0:
+            return
+        row = selItems[0].row()
+        if row == len(self.layerEntries)-1:
+            return
+        self.layerEntries[row+1], self.layerEntries[row] = self.layerEntries[row], self.layerEntries[row+1]
+        self.showLines()
+        self.tableWidget.setRangeSelected(QTableWidgetSelectionRange(row+1, 0, row+1, 3), True)
 
     def showLines(self):
         self.tableWidget.clearContents()

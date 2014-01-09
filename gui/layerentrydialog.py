@@ -53,6 +53,14 @@ class LayerEntryDialog(QDialog, Ui_LayerEntry):
         self.zoomToFeatureRadio.clicked.connect(self.enableOkButton)
         self.zoomToExpressionRadio.clicked.connect(self.enableOkButton)
 
+        if layerEntry is not None:
+            self.layerComboManager.setLayer(layerEntry.layer())
+            self.searchComboManager.setExpression(layerEntry.expression)
+            self.zoomToFeatureRadio.setChecked(layerEntry.useFeatureGeom)
+            self.zoomToExpressionRadio.setChecked(not layerEntry.useFeatureGeom)
+            self.xComboManager.setExpression(layerEntry.xExpression)
+            self.yComboManager.setExpression(layerEntry.yExpression)
+
     def enableOkButton(self, *args):
         isValid, layerEntry = self.checkEntry()
         self.buttonBox.button(QDialogButtonBox.Ok).setEnabled(isValid)

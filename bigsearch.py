@@ -27,12 +27,12 @@
 #
 #---------------------------------------------------------------------
 
-
 from PyQt4.QtCore import QUrl, QCoreApplication, QFileInfo, QSettings, QTranslator
-from PyQt4.QtGui import QAction, QIcon, QDesktopServices
+from PyQt4.QtGui import QAction, QIcon, QDesktopServices, QLineEdit
 from qgis.core import QgsApplication
 
 from gui.configurationdialog import ConfigurationDialog
+from core.searchprocess import SearchProcess
 
 import resources
 
@@ -40,6 +40,8 @@ import resources
 class BigSearch ():
     def __init__(self, iface):
         self.iface = iface
+
+        self.process = SearchProcess()
 
         # Initialise the translation environment.
         userPluginPath = QFileInfo(QgsApplication.qgisUserDbFilePath()).path()+"/python/plugins/bigsearch"
@@ -76,12 +78,20 @@ class BigSearch ():
         self.helpAction.triggered.connect(lambda: QDesktopServices().openUrl(QUrl("http://io.github.com/3nids/bigsearch/")))
         self.iface.addPluginToMenu("&Big Search", self.helpAction)
 
+        self.searchEdit = QLineEdit()
+        self.searchEdit.textChanged.connect(self.doSearch)
+        self.searchEditAction = self.iface.addToolBarWidget(self.searchEdit)
+
     def unload(self):
         # Remove the plugin menu item and icon
         # self.iface.removePluginMenu("&Big Search", self.dockAction)
         self.iface.removePluginMenu("&Big Search", self.helpAction)
         self.iface.removePluginMenu("&Big Search", self.settingsAction)
         # self.iface.removeToolBarIcon(self.dockAction)
+        self.iface.removeToolBarIcon(self.searchEditAction)
+
+    def doSearch(self, searchText):
+        self.process.newSearch(searchText)
 
     def showSettings(self):
         ConfigurationDialog(self.iface).exec_()

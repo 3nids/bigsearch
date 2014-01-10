@@ -31,6 +31,7 @@ from qgis.core import QgsProject
 
 from layerentry import LayerEntry
 
+
 class LayerEntriesRegistry():
 
     @staticmethod
@@ -65,8 +66,11 @@ class LayerEntriesRegistry():
                 break
             entryData = project.readListEntry("bigsearch", varName)[0]
             entry = LayerEntry(entryData[0], entryData[1], bool(entryData[2]), entryData[3], entryData[4])
+            if entry.layer() is None:
+                continue
             entries.append(entry)
             i += 1
+        LayerEntriesRegistry.save(entries)
         return entries
 
 
